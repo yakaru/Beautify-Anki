@@ -371,6 +371,7 @@ def renderPage(self,_old):
         desc=self._desc(deck),
         table=self._table(),
     )
+    content.__dict__["deckAsDirTree"] = deck["name"].replace("::","/")
     gui_hooks.overview_will_render_content(self, content)
     self.web.stdHtml(
         self._body % content.__dict__,
@@ -407,7 +408,7 @@ if THEME["heatmap-background"]:
 Overview._body = """
 <style>
 body{{
-     background: linear-gradient(20deg,{THEME[overlay-color1]}, {THEME[overlay-color2]}) fixed, url('{base}/user_files/assets/deck_backgrounds/%(deck)s.jpg'),url('{base}/user_files/assets/background.jpg') ;
+     background: linear-gradient(20deg,{THEME[overlay-color1]}, {THEME[overlay-color2]}) fixed, url('{base}/user_files/assets/deck_backgrounds/%(deckAsDirTree)s.jpg'),url('{base}/user_files/assets/background.jpg') ;
      background-size: 100%%;
      }}
 
